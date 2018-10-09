@@ -1,57 +1,506 @@
 {
   "swagger" : "2.0",
   "info" : {
-    "description" : "REST API of the Notificaton Service",
-    "version" : "1.0.0",
-    "title" : "Notification Service API"
+    "description" : "REST API of the Notification Service",
+    "version" : "v1.0.1",
+    "title" : "Notification Service API",
+    "contact" : {
+      "name" : "Rami Ruhayel",
+      "email" : "rami.ruhayel@bhpbilliton.com"
+    }
   },
+  "host" : "http://internal-notification-load-balancer-64625727.us-east-1.elb.amazonaws.com",
+  "basePath" : "/",
   "tags" : [ {
-    "name" : "Contact Entity",
-    "description" : "Simple Jpa Repository"
-  }, {
-    "name" : "NotificationGroup Entity",
-    "description" : "Simple Jpa Repository"
-  }, {
     "name" : "basic-error-controller",
     "description" : "Basic Error Controller"
   }, {
-    "name" : "notification-group-service-controller",
-    "description" : "Notification Group Service Controller"
+    "name" : "contact-controller",
+    "description" : "Contact Controller"
   }, {
-    "name" : "profile-controller",
-    "description" : "Profile Controller"
+    "name" : "notification-group-controller",
+    "description" : "Notification Group Controller"
+  }, {
+    "name" : "operation-handler",
+    "description" : "Operation Handler"
+  }, {
+    "name" : "web-mvc-endpoint-handler-mapping",
+    "description" : "Web Mvc Endpoint Handler Mapping"
   } ],
   "paths" : {
-    "/contacts" : {
+    "/actuator" : {
       "get" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "findAllContact",
-        "operationId" : "findAllContactUsingGET",
-        "produces" : [ "application/json", "application/hal+json", "text/uri-list", "application/x-spring-data-compact+json" ],
+        "tags" : [ "web-mvc-endpoint-handler-mapping" ],
+        "summary" : "links",
+        "operationId" : "linksUsingGET",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object",
+                "additionalProperties" : {
+                  "$ref" : "#/definitions/Link"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/auditevents" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
         "parameters" : [ {
-          "name" : "page",
-          "in" : "query",
-          "description" : "page",
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
           "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "size",
-          "in" : "query",
-          "description" : "size",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sort",
-          "in" : "query",
-          "description" : "sort",
-          "required" : false,
-          "type" : "string"
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
         } ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/beans" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_1",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/conditions" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_2",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/configprops" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_3",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/env" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_5",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/env/{toMatch}" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_4",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/health" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_6",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/heapdump" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_7",
+        "produces" : [ "application/octet-stream" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/httptrace" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_8",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/info" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_9",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/loggers" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_11",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/loggers/{name}" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_10",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
             }
           },
           "401" : {
@@ -67,15 +516,271 @@
         "deprecated" : false
       },
       "post" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "saveContact",
-        "operationId" : "saveContactUsingPOST",
-        "consumes" : [ "application/json" ],
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingPOST",
+        "consumes" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "in" : "body",
           "name" : "body",
           "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "201" : {
+            "description" : "Created"
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/mappings" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_12",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/metrics" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_14",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/metrics/{requiredMetricName}" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_13",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/scheduledtasks" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_15",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/actuator/threaddump" : {
+      "get" : {
+        "tags" : [ "operation-handler" ],
+        "summary" : "handle",
+        "operationId" : "handleUsingGET_16",
+        "produces" : [ "application/json", "application/vnd.spring-boot.actuator.v2+json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "string"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "type" : "object"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/contacts" : {
+      "get" : {
+        "tags" : [ "contact-controller" ],
+        "summary" : "getAll",
+        "operationId" : "getAllUsingGET",
+        "produces" : [ "*/*" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK",
+            "schema" : {
+              "$ref" : "#/definitions/Iterable«Contact»"
+            }
+          },
+          "401" : {
+            "description" : "Unauthorized"
+          },
+          "403" : {
+            "description" : "Forbidden"
+          },
+          "404" : {
+            "description" : "Not Found"
+          }
+        },
+        "deprecated" : false
+      },
+      "post" : {
+        "tags" : [ "contact-controller" ],
+        "summary" : "createContact",
+        "operationId" : "createContactUsingPOST",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "*/*" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "contact",
+          "description" : "contact",
           "required" : true,
           "schema" : {
             "$ref" : "#/definitions/Contact"
@@ -85,7 +790,7 @@
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
+              "$ref" : "#/definitions/Contact"
             }
           },
           "201" : {
@@ -106,380 +811,23 @@
     },
     "/contacts/{id}" : {
       "get" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "findOneContact",
-        "operationId" : "findOneContactUsingGET",
+        "tags" : [ "contact-controller" ],
+        "summary" : "getById",
+        "operationId" : "getByIdUsingGET",
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
           "description" : "id",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string",
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "put" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "saveContact",
-        "operationId" : "saveContactUsingPUT",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/Contact"
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "201" : {
-            "description" : "Created"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "delete" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "deleteContact",
-        "operationId" : "deleteContactUsingDELETE",
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      },
-      "patch" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "saveContact",
-        "operationId" : "saveContactUsingPATCH",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/Contact"
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      }
-    },
-    "/contacts/{id}/notificationGroups" : {
-      "get" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingGET_1",
-        "produces" : [ "application/hal+json" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "post" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingPOST",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "201" : {
-            "description" : "Created"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "put" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingPUT",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "201" : {
-            "description" : "Created"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "delete" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingDELETE_1",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      },
-      "patch" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingPATCH",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      }
-    },
-    "/contacts/{id}/notificationGroups/{notificationgroupId}" : {
-      "get" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingGET",
-        "consumes" : [ "application/hal+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "notificationgroupId",
-          "in" : "path",
-          "description" : "notificationgroupId",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resource%C2%ABNotification%20Group%C2%BB"
+              "$ref" : "#/definitions/Contact"
             }
           },
           "401" : {
@@ -495,24 +843,17 @@
         "deprecated" : false
       },
       "delete" : {
-        "tags" : [ "Contact Entity" ],
-        "summary" : "contactNotificationGroups",
-        "operationId" : "contactNotificationGroupsUsingDELETE",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
+        "tags" : [ "contact-controller" ],
+        "summary" : "deleteById",
+        "operationId" : "deleteByIdUsingDELETE",
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
           "description" : "id",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        }, {
-          "name" : "notificationgroupId",
-          "in" : "path",
-          "description" : "notificationgroupId",
-          "required" : true,
-          "type" : "string"
+          "type" : "string",
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
@@ -714,34 +1055,15 @@
     },
     "/notificationGroups" : {
       "get" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "findAllNotificationGroup",
-        "operationId" : "findAllNotificationGroupUsingGET",
-        "produces" : [ "application/json", "application/hal+json", "text/uri-list", "application/x-spring-data-compact+json" ],
-        "parameters" : [ {
-          "name" : "page",
-          "in" : "query",
-          "description" : "page",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "size",
-          "in" : "query",
-          "description" : "size",
-          "required" : false,
-          "type" : "string"
-        }, {
-          "name" : "sort",
-          "in" : "query",
-          "description" : "sort",
-          "required" : false,
-          "type" : "string"
-        } ],
+        "tags" : [ "notification-group-controller" ],
+        "summary" : "getAll",
+        "operationId" : "getAllUsingGET_1",
+        "produces" : [ "*/*" ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABNotification%20Group%C2%BB"
+              "$ref" : "#/definitions/Iterable«NotificationGroup»"
             }
           },
           "401" : {
@@ -757,32 +1079,29 @@
         "deprecated" : false
       },
       "post" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "saves a new NotificationGroup",
-        "operationId" : "saveNotificationGroupUsingPOST",
+        "tags" : [ "notification-group-controller" ],
+        "summary" : "createNotificationGroup",
+        "operationId" : "createNotificationGroupUsingPOST",
         "consumes" : [ "application/json" ],
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "in" : "body",
-          "name" : "body",
-          "description" : "body",
+          "name" : "notificationGroup",
+          "description" : "notificationGroup",
           "required" : true,
           "schema" : {
-            "$ref" : "#/definitions/Notification%20Group"
+            "$ref" : "#/definitions/NotificationGroup"
           }
         } ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Resource%C2%ABNotification%20Group%C2%BB"
+              "$ref" : "#/definitions/NotificationGroup"
             }
           },
           "201" : {
-            "description" : "Created",
-            "schema" : {
-              "$ref" : "#/definitions/Notification%20Group"
-            }
+            "description" : "Created"
           },
           "401" : {
             "description" : "Unauthorized"
@@ -799,70 +1118,23 @@
     },
     "/notificationGroups/{id}" : {
       "get" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "findOneNotificationGroup",
-        "operationId" : "findOneNotificationGroupUsingGET",
+        "tags" : [ "notification-group-controller" ],
+        "summary" : "getById",
+        "operationId" : "getByIdUsingGET_1",
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
           "description" : "id",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string",
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
             "description" : "OK",
             "schema" : {
-              "$ref" : "#/definitions/Resource%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "put" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "saves a new NotificationGroup",
-        "operationId" : "saveNotificationGroupUsingPUT",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/Notification%20Group"
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resource%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "201" : {
-            "description" : "Created",
-            "schema" : {
-              "$ref" : "#/definitions/Notification%20Group"
+              "$ref" : "#/definitions/NotificationGroup"
             }
           },
           "401" : {
@@ -878,68 +1150,21 @@
         "deprecated" : false
       },
       "delete" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "deleteNotificationGroup",
-        "operationId" : "deleteNotificationGroupUsingDELETE",
+        "tags" : [ "notification-group-controller" ],
+        "summary" : "deleteById",
+        "operationId" : "deleteByIdUsingDELETE_1",
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
           "description" : "id",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string",
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
             "description" : "OK"
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      },
-      "patch" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "saves a new NotificationGroup",
-        "operationId" : "saveNotificationGroupUsingPATCH",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "$ref" : "#/definitions/Notification%20Group"
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resource%C2%ABNotification%20Group%C2%BB"
-            }
-          },
-          "201" : {
-            "description" : "Created",
-            "schema" : {
-              "$ref" : "#/definitions/Notification%20Group"
-            }
           },
           "204" : {
             "description" : "No Content"
@@ -955,53 +1180,22 @@
       }
     },
     "/notificationGroups/{id}/contacts" : {
-      "get" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingGET_1",
-        "produces" : [ "application/hal+json" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
       "post" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingPOST",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
+        "tags" : [ "notification-group-controller" ],
+        "summary" : "addContacts",
+        "operationId" : "addContactsUsingPOST",
+        "consumes" : [ "application/json" ],
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "in" : "body",
-          "name" : "body",
-          "description" : "body",
+          "name" : "contactIds",
+          "description" : "contactIds",
           "required" : true,
           "schema" : {
             "type" : "array",
             "items" : {
-              "type" : "string"
+              "type" : "string",
+              "format" : "uuid"
             }
           }
         }, {
@@ -1009,15 +1203,12 @@
           "in" : "path",
           "description" : "id",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string",
+          "format" : "uuid"
         } ],
         "responses" : {
           "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
+            "description" : "OK"
           },
           "201" : {
             "description" : "Created"
@@ -1033,224 +1224,30 @@
           }
         },
         "deprecated" : false
-      },
-      "put" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingPUT",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "201" : {
-            "description" : "Created"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "delete" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingDELETE_1",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      },
-      "patch" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingPATCH",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "body",
-          "description" : "body",
-          "required" : true,
-          "schema" : {
-            "type" : "array",
-            "items" : {
-              "type" : "string"
-            }
-          }
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
       }
     },
-    "/notificationGroups/{id}/contacts/{contactId}" : {
-      "get" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingGET",
-        "consumes" : [ "application/hal+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "name" : "contactId",
-          "in" : "path",
-          "description" : "contactId",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/Resources%C2%ABContact%C2%BB"
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "delete" : {
-        "tags" : [ "NotificationGroup Entity" ],
-        "summary" : "notificationGroupContacts",
-        "operationId" : "notificationGroupContactsUsingDELETE",
-        "consumes" : [ "text/uri-list", "application/x-spring-data-compact+json" ],
-        "produces" : [ "*/*" ],
-        "parameters" : [ {
-          "name" : "contactId",
-          "in" : "path",
-          "description" : "contactId",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "id",
-          "in" : "path",
-          "description" : "id",
-          "required" : true,
-          "type" : "integer",
-          "format" : "int64"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK"
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          }
-        },
-        "deprecated" : false
-      }
-    },
-    "/notificationGroups/{id}/message/{message}" : {
-      "put" : {
-        "tags" : [ "notification-group-service-controller" ],
+    "/notificationGroups/{id}/message" : {
+      "post" : {
+        "tags" : [ "notification-group-controller" ],
         "summary" : "Sends a message to members of a Notification Group",
-        "operationId" : "sendMessageUsingPUT",
+        "operationId" : "sendMessageUsingPOST",
         "consumes" : [ "application/json" ],
         "produces" : [ "*/*" ],
         "parameters" : [ {
           "name" : "id",
           "in" : "path",
+          "description" : "id",
           "required" : true,
-          "type" : "integer",
-          "format" : "int64"
+          "type" : "string",
+          "format" : "uuid"
         }, {
+          "in" : "body",
           "name" : "message",
-          "in" : "path",
+          "description" : "message",
           "required" : true,
-          "type" : "string"
+          "schema" : {
+            "type" : "string"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -1267,57 +1264,6 @@
           },
           "404" : {
             "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      }
-    },
-    "/profile" : {
-      "get" : {
-        "tags" : [ "profile-controller" ],
-        "summary" : "listAllFormsOfMetadata",
-        "operationId" : "listAllFormsOfMetadataUsingGET",
-        "produces" : [ "*/*" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/ResourceSupport"
-            }
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
-          },
-          "404" : {
-            "description" : "Not Found"
-          }
-        },
-        "deprecated" : false
-      },
-      "options" : {
-        "tags" : [ "profile-controller" ],
-        "summary" : "profileOptions",
-        "operationId" : "profileOptionsUsingOPTIONS",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "*/*" ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "type" : "object"
-            }
-          },
-          "204" : {
-            "description" : "No Content"
-          },
-          "401" : {
-            "description" : "Unauthorized"
-          },
-          "403" : {
-            "description" : "Forbidden"
           }
         },
         "deprecated" : false
@@ -1337,69 +1283,31 @@
       },
       "title" : "Contact"
     },
-    "EmbeddedCollection«Contact»" : {
+    "Iterable«Contact»" : {
       "type" : "object",
-      "required" : [ "contacts" ],
-      "properties" : {
-        "contacts" : {
-          "type" : "array",
-          "description" : "Resource collection",
-          "items" : {
-            "$ref" : "#/definitions/Contact"
-          }
-        }
-      },
-      "title" : "EmbeddedCollection«Contact»",
-      "description" : "Embedded collection of Contact"
+      "title" : "Iterable«Contact»"
     },
-    "EmbeddedCollection«Notification Group»" : {
+    "Iterable«NotificationGroup»" : {
       "type" : "object",
-      "required" : [ "notificationGroups" ],
-      "properties" : {
-        "notificationGroups" : {
-          "type" : "array",
-          "description" : "Resource collection",
-          "items" : {
-            "$ref" : "#/definitions/Notification%20Group"
-          }
-        }
-      },
-      "title" : "EmbeddedCollection«Notification Group»",
-      "xml" : {
-        "name" : "content",
-        "wrapped" : true
-      },
-      "description" : "Embedded collection of NotificationGroup"
+      "title" : "Iterable«NotificationGroup»"
     },
     "Link" : {
       "type" : "object",
       "properties" : {
         "href" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "href",
-            "attribute" : true,
-            "wrapped" : false
-          }
-        },
-        "rel" : {
-          "type" : "string",
-          "xml" : {
-            "name" : "rel",
-            "attribute" : true,
-            "wrapped" : false
-          }
+          "type" : "string"
         },
         "templated" : {
           "type" : "boolean"
         }
       },
-      "title" : "Link",
-      "xml" : {
-        "name" : "link",
-        "namespace" : "http://www.w3.org/2005/Atom",
-        "attribute" : false,
-        "wrapped" : false
+      "title" : "Link"
+    },
+    "Map«string,Link»" : {
+      "type" : "object",
+      "title" : "Map«string,Link»",
+      "additionalProperties" : {
+        "$ref" : "#/definitions/Link"
       }
     },
     "ModelAndView" : {
@@ -1433,7 +1341,7 @@
       },
       "title" : "ModelAndView"
     },
-    "Notification Group" : {
+    "NotificationGroup" : {
       "type" : "object",
       "properties" : {
         "name" : {
@@ -1443,116 +1351,7 @@
           "type" : "string"
         }
       },
-      "title" : "Notification Group"
-    },
-    "ResourceSupport" : {
-      "type" : "object",
-      "properties" : {
-        "links" : {
-          "type" : "array",
-          "xml" : {
-            "name" : "link",
-            "namespace" : "http://www.w3.org/2005/Atom",
-            "attribute" : false,
-            "wrapped" : false
-          },
-          "items" : {
-            "$ref" : "#/definitions/Link"
-          }
-        }
-      },
-      "title" : "ResourceSupport"
-    },
-    "Resources«Contact»" : {
-      "type" : "object",
-      "required" : [ "_embedded", "_links" ],
-      "properties" : {
-        "_embedded" : {
-          "$ref" : "#/definitions/EmbeddedCollection%C2%ABContact%C2%BB"
-        },
-        "_links" : {
-          "type" : "object",
-          "description" : "Link collection",
-          "additionalProperties" : {
-            "$ref" : "#/definitions/Link"
-          }
-        }
-      },
-      "title" : "Resources«Contact»",
-      "description" : "Resources of Contact"
-    },
-    "Resources«Notification Group»" : {
-      "type" : "object",
-      "required" : [ "_embedded", "_links" ],
-      "properties" : {
-        "_embedded" : {
-          "$ref" : "#/definitions/EmbeddedCollection%C2%ABNotification%20Group%C2%BB"
-        },
-        "_links" : {
-          "type" : "object",
-          "description" : "Link collection",
-          "additionalProperties" : {
-            "$ref" : "#/definitions/Link"
-          }
-        }
-      },
-      "title" : "Resources«Notification Group»",
-      "xml" : {
-        "name" : "entities",
-        "attribute" : false,
-        "wrapped" : false
-      },
-      "description" : "Resources of NotificationGroup"
-    },
-    "Resource«Contact»" : {
-      "type" : "object",
-      "properties" : {
-        "links" : {
-          "type" : "array",
-          "xml" : {
-            "name" : "link",
-            "namespace" : "http://www.w3.org/2005/Atom",
-            "attribute" : false,
-            "wrapped" : false
-          },
-          "items" : {
-            "$ref" : "#/definitions/Link"
-          }
-        },
-        "name" : {
-          "type" : "string"
-        },
-        "number" : {
-          "type" : "string"
-        }
-      },
-      "title" : "Resource«Contact»",
-      "xml" : {
-        "name" : "Resource«Contact»",
-        "attribute" : false,
-        "wrapped" : false
-      }
-    },
-    "Resource«Notification Group»" : {
-      "type" : "object",
-      "properties" : {
-        "links" : {
-          "type" : "array",
-          "xml" : {
-            "name" : "link",
-            "namespace" : "http://www.w3.org/2005/Atom",
-            "attribute" : false,
-            "wrapped" : false
-          },
-          "items" : {
-            "$ref" : "#/definitions/Link"
-          }
-        },
-        "number" : {
-          "type" : "string"
-        }
-      },
-      "title" : "Resource«Notification Group»"
+      "title" : "NotificationGroup"
     },
     "View" : {
       "type" : "object",
@@ -1563,8 +1362,5 @@
       },
       "title" : "View"
     }
-  },
-  "host" : "virtserver.swaggerhub.com",
-  "schemes" : [ "https" ],
-  "basePath" : "/BHP_TECH_SI/Notifications_API/1.0.0"
+  }
 }
